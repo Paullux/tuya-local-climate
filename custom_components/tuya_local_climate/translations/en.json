@@ -1,0 +1,64 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to your Tuya device",
+        "description": "Enter the local connection details for your Tuya climate device.",
+        "data": {
+          "name": "Name",
+          "host": "IP address",
+          "device_id": "Device ID",
+          "local_key": "Local key",
+          "protocol_version": "Protocol version"
+        }
+      },
+      "dps": {
+        "title": "Datapoint mapping",
+        "description": "Map the datapoints (DPS) used by your device. The defaults match common Tuya A/C units.",
+        "data": {
+          "dp_power": "Power DP",
+          "dp_temp_set": "Target temperature DP",
+          "dp_temp_current": "Current temperature DP",
+          "dp_mode": "Mode DP",
+          "dp_fan_speed": "Fan speed DP",
+          "dp_swing": "Swing DP",
+          "dp_sleep": "Sleep mode DP"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the device. Check the IP, device ID and local key.",
+      "unknown": "Unexpected error occurred while connecting to the device."
+    },
+    "abort": {
+      "already_configured": "This device is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Datapoint mapping",
+        "description": "Update the datapoint (DPS) mapping for this device.",
+        "data": {
+          "dp_power": "Power DP",
+          "dp_temp_set": "Target temperature DP",
+          "dp_temp_current": "Current temperature DP",
+          "dp_mode": "Mode DP",
+          "dp_fan_speed": "Fan speed DP",
+          "dp_swing": "Swing DP",
+          "dp_sleep": "Sleep mode DP"
+        }
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "sleep": {
+        "name": "Sleep Mode"
+      },
+      "swing": {
+        "name": "Swing"
+      }
+    }
+  }
+}

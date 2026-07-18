@@ -1,0 +1,12 @@
+{
+  "domain": "tuya_local_climate",
+  "name": "Tuya Local Climate",
+  "codeowners": ["@Paullux"],
+  "config_flow": true,
+  "documentation": "https://github.com/Paullux/tuya-local-climate",
+  "issue_tracker": "https://github.com/Paullux/tuya-local-climate/issues",
+  "iot_class": "local_polling",
+  "homeassistant": "2024.2.0",
+  "requirements": ["tinytuya>=1.13.0"],
+  "version": "0.1.0"
+}
