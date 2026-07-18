@@ -2,7 +2,7 @@
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://github.com/hacs/integration)
 [![GitHub Release](https://img.shields.io/github/v/release/Paullux/tuya-local-climate)](https://github.com/Paullux/tuya-local-climate/releases)
-[![MIT](https://raw.githubusercontent.com/Paullux/tuya-local-climate/main/license-badge.svg)](LICENSE)
+[![MIT](license-badge.svg)](LICENSE)
 
 ![Logo](https://raw.githubusercontent.com/Paullux/tuya-local-climate/main/banner.png)
 
