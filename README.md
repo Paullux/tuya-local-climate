@@ -4,7 +4,7 @@
 [![GitHub Release](https://img.shields.io/github/v/release/Paullux/tuya-local-climate)](https://github.com/Paullux/tuya-local-climate/releases)
 [![License](https://img.shields.io/github/license/Paullux/tuya-local-climate)](LICENSE.md)
 
-![Logo](https://raw.githubusercontent.com/Paullux/tuya-local-climate/main/logo.png)
+![Logo](https://raw.githubusercontent.com/Paullux/tuya-local-climate/main/banner.png)
 
 A Home Assistant custom integration for controlling Tuya-based air conditioners **locally**, over your LAN, using [tinytuya](https://github.com/jasonacox/tinytuya). No Tuya/Smart Life cloud account is required at runtime — only the device's local key, which you extract once.
 
