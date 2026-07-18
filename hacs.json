@@ -1,6 +1,5 @@
 {
   "name": "Tuya Local Climate",
   "render_readme": true,
-  "domains": ["climate", "switch"],
   "homeassistant": "2024.2.0"
 }
