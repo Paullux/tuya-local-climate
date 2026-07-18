@@ -1,6 +1,7 @@
 """DataUpdateCoordinator for Tuya Local Climate."""
 from __future__ import annotations
 
+import asyncio
 import logging
 from datetime import timedelta
 from typing import Any
@@ -37,10 +38,16 @@ class TuyaLocalClimateCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         self.device = tinytuya.Device(
             device_id, host, local_key, version=float(protocol_version)
         )
-        self.device.set_socketPersistent(True)
+        # Reconnect fresh on every call instead of keeping a long-lived socket:
+        # a persistent socket shared between the poll loop and command calls
+        # (each dispatched to a different executor thread) can end up in a
+        # broken state after concurrent access, causing spurious "unavailable".
+        self.device.set_socketPersistent(False)
+        self._device_lock = asyncio.Lock()
 
     async def _async_update_data(self) -> dict[str, Any]:
-        result = await self.hass.async_add_executor_job(self.device.status)
+        async with self._device_lock:
+            result = await self.hass.async_add_executor_job(self.device.status)
         if not result:
             raise UpdateFailed("No response from device")
         if "Error" in result:
@@ -51,7 +58,8 @@ class TuyaLocalClimateCoordinator(DataUpdateCoordinator[dict[str, Any]]):
 
     async def async_set_dp(self, dp: str, value: Any) -> None:
         """Set a single datapoint and refresh state."""
-        await self.hass.async_add_executor_job(self.device.set_value, int(dp), value)
+        async with self._device_lock:
+            await self.hass.async_add_executor_job(self.device.set_value, int(dp), value)
         if self.data is not None:
             self.data[dp] = value
             self.async_set_updated_data(self.data)
@@ -59,7 +67,8 @@ class TuyaLocalClimateCoordinator(DataUpdateCoordinator[dict[str, Any]]):
     async def async_set_dps(self, values: dict[str, Any]) -> None:
         """Set multiple datapoints at once and refresh state."""
         payload = {int(dp): value for dp, value in values.items()}
-        await self.hass.async_add_executor_job(self.device.set_multiple_values, payload)
+        async with self._device_lock:
+            await self.hass.async_add_executor_job(self.device.set_multiple_values, payload)
         if self.data is not None:
             self.data.update(values)
             self.async_set_updated_data(self.data)
